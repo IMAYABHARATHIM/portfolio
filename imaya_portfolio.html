@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imaya Bharathi M — UI/UX Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Product+Sans:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+  :root {
+    --md-primary: #1a73e8;
+    --md-primary-dark: #1557b0;
+    --md-secondary: #34a853;
+    --md-error: #ea4335;
+    --md-warning: #fbbc04;
+    --md-surface: #ffffff;
+    --md-surface-variant: #f8f9fa;
+    --md-on-surface: #202124;
+    --md-on-surface-variant: #5f6368;
+    --md-outline: #dadce0;
+    --md-shadow-1: 0 1px 2px rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+    --md-shadow-2: 0 1px 2px rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
+    --md-shadow-3: 0 4px 8px 3px rgba(60,64,67,.15), 0 1px 3px rgba(60,64,67,.3);
+    --google-blue: #4285f4;
+    --google-red: #ea4335;
+    --google-yellow: #fbbc05;
+    --google-green: #34a853;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #f8f9fa;
+    color: var(--md-on-surface);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--md-outline);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Product Sans', sans-serif;
+    font-size: 22px; font-weight: 700; letter-spacing: -.5px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .nav-logo span:nth-child(1) { color: var(--google-blue); }
+  .nav-logo span:nth-child(2) { color: var(--google-red); }
+  .nav-logo span:nth-child(3) { color: var(--google-yellow); }
+  .nav-logo span:nth-child(4) { color: var(--google-blue); }
+  .nav-logo span:nth-child(5) { color: var(--google-green); }
+  .nav-logo span:nth-child(6) { color: var(--google-red); }
+  .nav-links { display: flex; gap: 8px; align-items: center; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500; color: var(--md-on-surface-variant);
+    text-decoration: none; padding: 8px 16px; border-radius: 20px;
+    transition: background .2s, color .2s;
+  }
+  .nav-links a:hover { background: #e8f0fe; color: var(--md-primary); }
+  .nav-links .cta {
+    background: var(--md-primary); color: #fff;
+    border-radius: 20px; padding: 8px 20px;
+  }
+  .nav-links .cta:hover { background: var(--md-primary-dark); color: #fff; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 80px 24px 40px;
+    background: linear-gradient(135deg, #fff 60%, #e8f0fe 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, #e8f0fe 0%, transparent 70%);
+  }
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #e8f0fe; color: var(--md-primary);
+    font-size: 13px; font-weight: 500; border-radius: 20px;
+    padding: 6px 14px; margin-bottom: 20px;
+  }
+  .hero-badge .material-icons-round { font-size: 16px; }
+  .hero h1 {
+    font-family: 'Google Sans', sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700; line-height: 1.1; margin-bottom: 16px;
+    color: var(--md-on-surface);
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--md-primary);
+  }
+  .hero-sub {
+    font-size: 18px; color: var(--md-on-surface-variant);
+    margin-bottom: 32px; max-width: 460px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-filled {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--md-primary); color: #fff;
+    border: none; border-radius: 24px; padding: 12px 24px;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    text-decoration: none; transition: box-shadow .2s, background .2s;
+    box-shadow: var(--md-shadow-1);
+  }
+  .btn-filled:hover { background: var(--md-primary-dark); box-shadow: var(--md-shadow-2); }
+  .btn-outlined {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--md-primary);
+    border: 1.5px solid var(--md-primary); border-radius: 24px;
+    padding: 12px 24px; font-size: 14px; font-weight: 500;
+    cursor: pointer; text-decoration: none; transition: background .2s;
+  }
+  .btn-outlined:hover { background: #e8f0fe; }
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .avatar-ring {
+    width: 260px; height: 260px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+    padding: 4px; box-shadow: var(--md-shadow-3);
+  }
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: linear-gradient(135deg, #e8f0fe 0%, #fce8e6 50%, #e6f4ea 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Google Sans', sans-serif;
+    font-size: 80px; font-weight: 700; color: var(--md-primary);
+    border: 4px solid #fff;
+  }
+  .floating-chip {
+    position: absolute; background: #fff; border-radius: 24px;
+    box-shadow: var(--md-shadow-2); padding: 8px 16px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 500; color: var(--md-on-surface);
+  }
+  .chip-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .chip1 { top: 30px; right: -20px; }
+  .chip2 { bottom: 40px; left: -20px; }
+  .chip3 { top: 50%; left: -40px; transform: translateY(-50%); }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 80px 24px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-header { margin-bottom: 48px; }
+  .section-eyebrow {
+    font-size: 12px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--md-primary); margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Google Sans', sans-serif;
+    font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--md-on-surface);
+  }
+  .section-subtitle { font-size: 16px; color: var(--md-on-surface-variant); margin-top: 8px; }
+
+  /* ── SKILLS CHIPS ── */
+  .skills-section { background: #fff; }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .skill-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--md-surface-variant); border: 1px solid var(--md-outline);
+    border-radius: 8px; padding: 12px 18px;
+    font-size: 14px; font-weight: 500; color: var(--md-on-surface);
+    transition: box-shadow .2s, border-color .2s;
+  }
+  .skill-chip:hover { box-shadow: var(--md-shadow-1); border-color: var(--md-primary); }
+  .skill-chip .material-icons-round { font-size: 18px; color: var(--md-primary); }
+  .skills-category { margin-bottom: 32px; }
+  .skills-cat-label {
+    font-size: 13px; font-weight: 500; color: var(--md-on-surface-variant);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-section { background: var(--md-surface-variant); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+  .project-card {
+    background: #fff; border-radius: 16px; overflow: hidden;
+    box-shadow: var(--md-shadow-1); transition: box-shadow .25s, transform .25s;
+    cursor: pointer;
+  }
+  .project-card:hover { box-shadow: var(--md-shadow-3); transform: translateY(-4px); }
+  .card-thumb {
+    height: 180px; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .card-thumb .material-icons-round { font-size: 56px; opacity: .25; color: #fff; }
+  .card-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(255,255,255,.2); color: #fff;
+    border-radius: 12px; padding: 4px 10px; font-size: 11px;
+    font-weight: 500; backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,.3);
+  }
+  .card-body { padding: 20px; }
+  .card-title {
+    font-family: 'Google Sans', sans-serif;
+    font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--md-on-surface);
+  }
+  .card-desc { font-size: 14px; color: var(--md-on-surface-variant); margin-bottom: 16px; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 12px; font-weight: 500; padding: 4px 10px;
+    border-radius: 12px; background: #e8f0fe; color: var(--md-primary);
+  }
+  .tag.green { background: #e6f4ea; color: #137333; }
+  .tag.red { background: #fce8e6; color: #c5221f; }
+  .tag.yellow { background: #fef7e0; color: #8a6d00; }
+
+  /* Thumb colors */
+  .thumb-blue { background: linear-gradient(135deg, #4285f4, #1a73e8); }
+  .thumb-green { background: linear-gradient(135deg, #34a853, #0d904f); }
+  .thumb-red { background: linear-gradient(135deg, #ea4335, #c5221f); }
+  .thumb-yellow { background: linear-gradient(135deg, #fbbc04, #f9a825); }
+  .thumb-purple { background: linear-gradient(135deg, #9c27b0, #673ab7); }
+  .thumb-teal { background: linear-gradient(135deg, #00bcd4, #0097a7); }
+  .thumb-orange { background: linear-gradient(135deg, #ff6d00, #e65100); }
+
+  /* ── EXPERIENCE ── */
+  .exp-section { background: #fff; }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+    width: 2px; background: var(--md-outline);
+  }
+  .timeline-item { display: flex; gap: 24px; margin-bottom: 40px; position: relative; }
+  .tl-dot {
+    width: 56px; height: 56px; min-width: 56px; border-radius: 50%;
+    background: #e8f0fe; border: 2px solid var(--md-primary);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--md-primary); z-index: 1;
+  }
+  .tl-dot .material-icons-round { font-size: 24px; }
+  .tl-content {
+    background: var(--md-surface-variant); border-radius: 12px;
+    padding: 20px 24px; flex: 1; border: 1px solid var(--md-outline);
+  }
+  .tl-role { font-family: 'Google Sans', sans-serif; font-size: 18px; font-weight: 700; }
+  .tl-company {
+    font-size: 14px; color: var(--md-primary); font-weight: 500; margin-bottom: 4px;
+  }
+  .tl-period {
+    font-size: 13px; color: var(--md-on-surface-variant);
+    display: flex; align-items: center; gap: 4px; margin-bottom: 12px;
+  }
+  .tl-period .material-icons-round { font-size: 14px; }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li {
+    font-size: 14px; color: var(--md-on-surface-variant);
+    padding: 4px 0; display: flex; gap: 8px; align-items: flex-start;
+  }
+  .tl-bullets li::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--md-primary); margin-top: 7px; flex-shrink: 0;
+  }
+
+  /* ── GRAPHIC DESIGN ── */
+  .graphic-section { background: var(--md-surface-variant); }
+  .graphic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .graphic-card {
+    background: #fff; border-radius: 16px; overflow: hidden;
+    box-shadow: var(--md-shadow-1); transition: box-shadow .2s, transform .2s;
+  }
+  .graphic-card:hover { box-shadow: var(--md-shadow-2); transform: translateY(-3px); }
+  .graphic-thumb {
+    height: 140px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+  }
+  .graphic-thumb .material-icons-round { font-size: 42px; color: #fff; opacity: .85; }
+  .graphic-label {
+    padding: 12px 16px;
+    font-size: 14px; font-weight: 500; color: var(--md-on-surface); text-align: center;
+  }
+  .graphic-sub {
+    font-size: 12px; color: var(--md-on-surface-variant); text-align: center;
+    padding: 0 16px 14px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section { background: #fff; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 16px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--md-surface-variant); border-radius: 12px; padding: 16px 20px;
+    border: 1px solid var(--md-outline); text-decoration: none; color: inherit;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .contact-item:hover { border-color: var(--md-primary); box-shadow: var(--md-shadow-1); }
+  .contact-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #e8f0fe; color: var(--md-primary);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .contact-icon .material-icons-round { font-size: 22px; }
+  .contact-label { font-size: 12px; color: var(--md-on-surface-variant); margin-bottom: 2px; }
+  .contact-value { font-size: 14px; font-weight: 500; color: var(--md-on-surface); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #202124; color: #9aa0a6;
+    text-align: center; padding: 32px 24px;
+    font-size: 14px;
+  }
+  footer .footer-logo {
+    font-family: 'Product Sans', sans-serif; font-size: 20px;
+    font-weight: 700; margin-bottom: 8px;
+    display: flex; justify-content: center; gap: 2px;
+  }
+  footer .footer-logo span:nth-child(1) { color: var(--google-blue); }
+  footer .footer-logo span:nth-child(2) { color: var(--google-red); }
+  footer .footer-logo span:nth-child(3) { color: var(--google-yellow); }
+  footer .footer-logo span:nth-child(4) { color: var(--google-blue); }
+  footer .footer-logo span:nth-child(5) { color: var(--google-green); }
+  footer .footer-logo span:nth-child(6) { color: var(--google-red); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge, .hero h1, .hero-sub, .hero-actions {
+    animation: fadeUp .6s ease both;
+  }
+  .hero h1       { animation-delay: .1s; }
+  .hero-sub      { animation-delay: .2s; }
+  .hero-actions  { animation-delay: .3s; }
+  .avatar-ring   { animation: fadeUp .7s .2s ease both; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+  }
+  .floating-chip { animation: float 3s ease-in-out infinite; }
+  .chip1 { animation-delay: 0s; }
+  .chip2 { animation-delay: 1s; }
+  .chip3 { animation-delay: .5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .hero-actions { justify-content: center; }
+    .hero-visual { order: -1; }
+    .chip1, .chip2, .chip3 { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links a:not(.cta) { display: none; }
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-line {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--google-blue), var(--google-red), var(--google-yellow), var(--google-green));
+    z-index: 200; transition: width .1s linear;
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span>I</span><span>m</span><span>a</span><span>y</span><span>a</span><span>.</span>
+  </div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#projects">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#graphic">Design</a>
+    <a href="#contact" class="cta">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span class="material-icons-round">verified</span>
+        UI/UX Designer · WordPress Developer
+      </div>
+      <h1>Crafting <em>user-first</em> digital experiences</h1>
+      <p class="hero-sub">Hi, I'm Imaya Bharathi M — a UI/UX designer with 1+ year of experience building clean, intuitive interfaces with Figma & WordPress.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-filled">
+          <span class="material-icons-round" style="font-size:18px">work</span>
+          View My Work
+        </a>
+        <a href="#contact" class="btn-outlined">
+          <span class="material-icons-round" style="font-size:18px">mail</span>
+          Get in Touch
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-ring">
+        <div class="avatar-inner">IB</div>
+      </div>
+      <div class="floating-chip chip1">
+        <span class="chip-dot" style="background:#4285f4"></span>
+        Figma Expert
+      </div>
+      <div class="floating-chip chip2">
+        <span class="chip-dot" style="background:#34a853"></span>
+        20+ UI Screens
+      </div>
+      <div class="floating-chip chip3">
+        <span class="chip-dot" style="background:#fbbc04"></span>
+        UX Research
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">What I bring</div>
+      <div class="section-title">Skills & Tools</div>
+    </div>
+
+    <div class="skills-category">
+      <div class="skills-cat-label">UX Research</div>
+      <div class="skills-grid">
+        <div class="skill-chip"><span class="material-icons-round">person_search</span>User Interviews</div>
+        <div class="skill-chip"><span class="material-icons-round">account_circle</span>Personas</div>
+        <div class="skill-chip"><span class="material-icons-round">account_tree</span>Information Architecture</div>
+        <div class="skill-chip"><span class="material-icons-round">route</span>User Flows</div>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <div class="skills-cat-label">UI Design</div>
+      <div class="skills-grid">
+        <div class="skill-chip"><span class="material-icons-round">draw</span>Wireframing</div>
+        <div class="skill-chip"><span class="material-icons-round">touch_app</span>Prototyping</div>
+        <div class="skill-chip"><span class="material-icons-round">style</span>Design Systems</div>
+        <div class="skill-chip"><span class="material-icons-round">devices</span>Responsive Design</div>
+        <div class="skill-chip"><span class="material-icons-round">dashboard</span>High-Fidelity UI</div>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <div class="skills-cat-label">Tools & Tech</div>
+      <div class="skills-grid">
+        <div class="skill-chip"><span class="material-icons-round">design_services</span>Figma (Auto Layout)</div>
+        <div class="skill-chip"><span class="material-icons-round">web</span>WordPress</div>
+        <div class="skill-chip"><span class="material-icons-round">palette</span>Canva</div>
+        <div class="skill-chip"><span class="material-icons-round">code</span>HTML & CSS</div>
+        <div class="skill-chip"><span class="material-icons-round">smart_toy</span>AI-Assisted Design</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Featured Work</div>
+      <div class="section-title">UI/UX Projects</div>
+      <div class="section-subtitle">Selected case studies in product design</div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="card-thumb thumb-blue">
+          <span class="material-icons-round">shopping_bag</span>
+          <div class="card-badge">E-Commerce</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Hemhey Website</div>
+          <div class="card-desc">Designed the full UI layout, user flow, and responsive components for a seamless cross-device shopping experience.</div>
+          <div class="card-tags">
+            <span class="tag">Figma</span>
+            <span class="tag green">User Flow</span>
+            <span class="tag">Responsive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-thumb thumb-green">
+          <span class="material-icons-round">school</span>
+          <div class="card-badge">WordPress</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Karur Kongu College</div>
+          <div class="card-desc">Redesigned the college website UI/UX and improved content structure using WordPress. Enhanced navigation and readability.</div>
+          <div class="card-tags">
+            <span class="tag">WordPress</span>
+            <span class="tag green">Redesign</span>
+            <span class="tag yellow">Navigation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-thumb thumb-yellow">
+          <span class="material-icons-round">approval</span>
+          <div class="card-badge">Enterprise UX</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Leave Approval System</div>
+          <div class="card-desc">Led UX research, persona creation, and information architecture to streamline and simplify the employee leave approval workflow.</div>
+          <div class="card-tags">
+            <span class="tag yellow">UX Research</span>
+            <span class="tag">Personas</span>
+            <span class="tag green">IA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-thumb thumb-purple">
+          <span class="material-icons-round">music_note</span>
+          <div class="card-badge">Mobile App</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Collaborative Music App</div>
+          <div class="card-desc">Designed discovery-based UX with research insights, focusing on intuitive navigation and social flow for music creators.</div>
+          <div class="card-tags">
+            <span class="tag">Mobile UX</span>
+            <span class="tag">Social Design</span>
+            <span class="tag red">Discovery</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-thumb thumb-teal">
+          <span class="material-icons-round">smart_toy</span>
+          <div class="card-badge">AI Design</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">AI-Assisted Design Work</div>
+          <div class="card-desc">Created branding assets, posters, and visual content using AI-assisted design tools — integrated into modern design workflows.</div>
+          <div class="card-tags">
+            <span class="tag">AI Tools</span>
+            <span class="tag green">Branding</span>
+            <span class="tag">Visual Design</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GRAPHIC DESIGN -->
+<section class="graphic-section" id="graphic">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Creative Work</div>
+      <div class="section-title">Graphic Design</div>
+      <div class="section-subtitle">Visual communication across mediums</div>
+    </div>
+    <div class="graphic-grid">
+
+      <div class="graphic-card">
+        <div class="graphic-thumb thumb-blue">
+          <span class="material-icons-round">star</span>
+        </div>
+        <div class="graphic-label">Logo Design</div>
+        <div class="graphic-sub">Brand identity & wordmarks</div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-thumb thumb-red">
+          <span class="material-icons-round">campaign</span>
+        </div>
+        <div class="graphic-label">Poster Design</div>
+        <div class="graphic-sub">Event & promotional visuals</div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-thumb thumb-purple">
+          <span class="material-icons-round">wallpaper</span>
+        </div>
+        <div class="graphic-label">Wallpaper Design</div>
+        <div class="graphic-sub">Digital & mobile wallpapers</div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-thumb thumb-orange">
+          <span class="material-icons-round">menu_book</span>
+        </div>
+        <div class="graphic-label">Book Cover Design</div>
+        <div class="graphic-sub">Editorial & publication art</div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-thumb thumb-green">
+          <span class="material-icons-round">workspace_premium</span>
+        </div>
+        <div class="graphic-label">Certificate Design</div>
+        <div class="graphic-sub">Awards & achievement layouts</div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-thumb thumb-teal">
+          <span class="material-icons-round">summarize</span>
+        </div>
+        <div class="graphic-label">Summary Design</div>
+        <div class="graphic-sub">Infographic & data visuals</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section" id="experience">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Career</div>
+      <div class="section-title">Experience</div>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="tl-dot">
+          <span class="material-icons-round">design_services</span>
+        </div>
+        <div class="tl-content">
+          <div class="tl-role">UI/UX Designer</div>
+          <div class="tl-company">Aveon InfoTech</div>
+          <div class="tl-period">
+            <span class="material-icons-round">schedule</span>
+            Full Time · 1 Year
+          </div>
+          <ul class="tl-bullets">
+            <li>Designed 20+ high-fidelity UI screens, improving usability and visual consistency across products.</li>
+            <li>Built structured user flows, wireframes, and prototypes in Figma using Auto Layout and component libraries.</li>
+            <li>Collaborated with developers to ensure pixel-aligned implementation across web and mobile.</li>
+            <li>Applied user-centered design principles to enhance navigation clarity and reduce cognitive load.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot" style="border-color:#34a853; background:#e6f4ea; color:#34a853">
+          <span class="material-icons-round">school</span>
+        </div>
+        <div class="tl-content">
+          <div class="tl-role">UI/UX Design Intern</div>
+          <div class="tl-company" style="color:#34a853">Wyreflow Technology</div>
+          <div class="tl-period">
+            <span class="material-icons-round">schedule</span>
+            Internship · 1 Month
+          </div>
+          <ul class="tl-bullets">
+            <li>Designed wireframes and interactive prototypes for web applications.</li>
+            <li>Assisted in UX research and applied insights to improve user experience.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot" style="border-color:#fbbc04; background:#fef7e0; color:#f9a825">
+          <span class="material-icons-round">school</span>
+        </div>
+        <div class="tl-content">
+          <div class="tl-role">B.E. Computer Science & Engineering</div>
+          <div class="tl-company" style="color:#f9a825">AVS College of Technology</div>
+          <div class="tl-period">
+            <span class="material-icons-round">schedule</span>
+            2021 – 2025
+          </div>
+          <ul class="tl-bullets">
+            <li>Graduated with a foundation in computer science, applying engineering thinking to design problems.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Let's Connect</div>
+      <div class="section-title">Get in Touch</div>
+      <div class="section-subtitle">Open for full-time roles & freelance projects</div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <a href="tel:+918056741389" class="contact-item">
+          <div class="contact-icon"><span class="material-icons-round">phone</span></div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+91 80567 41389</div>
+          </div>
+        </a>
+        <a href="mailto:imayabharathi228@gmail.com" class="contact-item">
+          <div class="contact-icon" style="background:#fce8e6; color:#ea4335"><span class="material-icons-round">mail</span></div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">imayabharathi228@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/imayabharathim" target="_blank" class="contact-item">
+          <div class="contact-icon" style="background:#e8f0fe; color:#0a66c2"><span class="material-icons-round">work</span></div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">linkedin.com/in/imayabharathim</div>
+          </div>
+        </a>
+        <a href="https://behance.net/imayabharathim" target="_blank" class="contact-item">
+          <div class="contact-icon" style="background:#e8f0fe; color:#053eff"><span class="material-icons-round">palette</span></div>
+          <div>
+            <div class="contact-label">Behance</div>
+            <div class="contact-value">behance.net/imayabharathim</div>
+          </div>
+        </a>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center;">
+        <div style="text-align:center; padding:40px;">
+          <div style="font-family:'Google Sans',sans-serif; font-size:48px; font-weight:700; background:linear-gradient(135deg,#4285f4,#34a853); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:16px;">IB</div>
+          <div style="font-family:'Google Sans',sans-serif; font-size:22px; font-weight:700; color:var(--md-on-surface); margin-bottom:8px;">Imaya Bharathi M</div>
+          <div style="font-size:14px; color:var(--md-on-surface-variant); margin-bottom:4px;">UI/UX Designer · WordPress Developer</div>
+          <div style="font-size:13px; color:var(--md-on-surface-variant);">English (Professional) · Tamil (Native)</div>
+          <div style="margin-top:24px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+            <span style="background:#e8f0fe; color:var(--md-primary); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:500;">Figma</span>
+            <span style="background:#e6f4ea; color:#137333; padding:6px 14px; border-radius:20px; font-size:13px; font-weight:500;">WordPress</span>
+            <span style="background:#fef7e0; color:#8a6d00; padding:6px 14px; border-radius:20px; font-size:13px; font-weight:500;">UX Research</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <span>I</span><span>m</span><span>a</span><span>y</span><span>a</span><span>.</span>
+  </div>
+  <p style="margin-bottom:4px;">Designed with care · Built with Material Design</p>
+  <p style="font-size:12px; opacity:.6;">© 2025 Imaya Bharathi M · All rights reserved</p>
+</footer>
+
+<script>
+  // Scroll progress line
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('scrollLine').style.width = progress + '%';
+  });
+</script>
+</body>
+</html>
